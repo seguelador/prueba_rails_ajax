@@ -1,0 +1,8 @@
+<% @companies.each do |company| %>
+  <tr>
+    <td><%= company.name %></td>
+    <td><%= link_to 'Show', company, class: 'btn btn-default' %></td>
+    <td><%= link_to 'Edit', edit_company_path(company), class: 'btn btn-default', remote: true %></td>
+    <td><%= link_to 'Destroy', company, method: :delete, remote: true, data: { confirm: 'Are you sure?' }, class: 'btn btn-default' %></td>
+  </tr>
+<% end %>

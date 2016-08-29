@@ -1,0 +1,15 @@
+$(document).on('turbolinks:load', function() {
+
+  // $('#btn-new-company').click(function(e){
+  // 	e.preventDefault();
+  // 	$('#modal-new-company').modal('show');
+  // });
+  
+  list_companies = function(){
+  	$.ajax({
+  		url: '/companies/list_companies',
+  		type: 'POST'
+  	});  	
+  }
+
+});
