@@ -1,5 +1,6 @@
 class CompaniesController < ApplicationController
   before_action :set_company, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:show]
 
   # GET /companies
   # GET /companies.json
@@ -10,6 +11,8 @@ class CompaniesController < ApplicationController
   # GET /companies/1
   # GET /companies/1.json
   def show
+  	@comment = Comment.new
+  	@comments = Comment.where(company_id: params[:id])
   end
 
   # GET /companies/new
@@ -75,6 +78,20 @@ class CompaniesController < ApplicationController
 
   	respond_to do |format|
       format.js
+    end
+  end
+
+  def add_comment
+
+  	@comment = Comment.new(text: params[:text], company_id: params[:id])
+
+    respond_to do |format|
+      if @comment.save
+        format.js
+      else
+        format.html { render :new }
+        format.json { render json: @comment.errors, status: :unprocessable_entity }
+      end
     end
   end
 

@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   resources :comments
   resources :companies do 
     collection do 
       post 'list_companies'
+      post 'add_comment'
     end
   end
   devise_for :users
